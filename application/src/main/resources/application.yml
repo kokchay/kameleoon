@@ -1,0 +1,46 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /weather-service
+  error:
+    whitelabel:
+      enabled: false
+
+weather:
+  servers:
+    - url: 'http://localhost:9001/weather-service'
+      description: Local Weather Service
+#// todo
+spring:
+  web:
+    resources:
+      add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 8KB
+      max-file-size: 100MB
+      max-request-size: 150MB
+
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  group-configs[0].group: weather
+  group-configs[0].displayName: Weather Endpoints
+  group-configs[0].pathsToMatch: '/weather/**'
+  swagger-ui:
+    path: '/swagger-ui.html'
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
