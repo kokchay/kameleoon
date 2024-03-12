@@ -10,7 +10,16 @@ weather:
   servers:
     - url: 'http://localhost:9001/weather-service'
       description: Local Weather Service
-#// todo
+  hazelcast:
+    host: localhost:5701
+    cluster-name: dev
+    cache-name: weather
+    cache-default-ttl: 600
+    max-idle-seconds: 600
+  openweathermap:
+    api-key: ccfd3a4a0b42de2181bb823f555b7865 #todo
+    api-url: https://api.openweathermap.org/data/2.5/weather
+
 spring:
   web:
     resources:

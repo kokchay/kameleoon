@@ -1,6 +1,6 @@
 package com.kameleoon.configuration;
 
-import com.kameleoon.service.configuraiton.WeatherConfigurationProperties;
+import com.kameleoon.domain.configuraiton.WeatherConfigurationProperties;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;

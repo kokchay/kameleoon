@@ -1,8 +1,8 @@
 package com.kameleoon.handler;
 
-import com.kameleoon.service.dto.ErrorResponse;
-import com.kameleoon.service.exception.AbstractBusinessLogicException;
-import com.kameleoon.service.exception.BusinessLogicException;
+import com.kameleoon.domain.dto.ErrorResponse;
+import com.kameleoon.domain.exception.AbstractBusinessLogicException;
+import com.kameleoon.domain.exception.BusinessLogicException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -174,7 +174,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ResponseBody
   @ExceptionHandler(AbstractBusinessLogicException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ResponseEntity<ErrorResponse> handleException(final HttpServletRequest request,
                                                        final BusinessLogicException ex) {
     final String message = Optional.of(ex)
@@ -187,12 +187,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                              .orElse(DEFAULT_CODE);
     return new ResponseEntity<>(ErrorResponse.builder()
                                              .path(request.getServletPath())
-                                             .status(HttpStatus.BAD_REQUEST.value())
+                                             .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
                                              .code(code)
                                              .message(message)
-                                             .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                                             .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                                              .build(),
-                                HttpStatus.BAD_REQUEST);
+                                HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 }

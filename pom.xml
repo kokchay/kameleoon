@@ -12,15 +12,24 @@
         <module>domain</module>
         <module>application</module>
         <module>rest-adapter</module>
-        <module>postgres-adapter</module>
+        <module>hazelcast-adapter</module>
+        <module>external-service-adapter</module>
     </modules>
     <properties>
         <java.version>17</java.version>
         <spring.boot.version>3.2.3</spring.boot.version>
         <modelmapper.version>3.1.1</modelmapper.version>
+        <hazelcast.version>5.3.6</hazelcast.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring.boot.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>

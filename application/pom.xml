@@ -25,10 +25,14 @@
         </dependency>
         <dependency>
             <groupId>com.kameleoon</groupId>
-            <artifactId>postgres-adapter</artifactId>
+            <artifactId>external-service-adapter</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.kameleoon</groupId>
+            <artifactId>hazelcast-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
