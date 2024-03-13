@@ -38,10 +38,10 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 ![diff 490ms](https://github.com/kokchay/kameleoon/assets/125590318/05406577-bd60-4862-9ba6-3cbaa5f74af6)
 
 # Additional useful links
-1. [Hazelcast docs](https://docs.hazelcast.com/hazelcast/5.3/)
+1. [Hazelcast documentation](https://docs.hazelcast.com/hazelcast/5.3/)
 2. [Hazelcast Spring framework implementation](https://reflectoring.io/spring-boot-hazelcast/)
-3. [Swagger docs](https://swagger.io/docs/)
+3. [Swagger documentation](https://swagger.io/docs/)
 4. [Swagger Spring framework implementation](https://www.baeldung.com/spring-rest-openapi-documentation)
-5. [Docker docs](https://docs.docker.com/)
+5. [Docker documentation](https://docs.docker.com/)
 6. [Docker Compose docs](https://docs.docker.com/compose/)
 
