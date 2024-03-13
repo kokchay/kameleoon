@@ -43,5 +43,5 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 3. [Swagger documentation](https://swagger.io/docs/)
 4. [Swagger Spring framework implementation](https://www.baeldung.com/spring-rest-openapi-documentation)
 5. [Docker documentation](https://docs.docker.com/)
-6. [Docker Compose docs](https://docs.docker.com/compose/)
+6. [Docker Compose documentation](https://docs.docker.com/compose/)
 
