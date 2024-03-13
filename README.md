@@ -27,3 +27,9 @@ For further information on clean architecture and its benefits, refer to this ht
 Contributing
 Contributions are welcome! Feel free to submit issues or pull requests.
 
+`This is an example of data retrieval from the cache.`
+![diff 5ms](https://github.com/kokchay/kameleoon/assets/125590318/5d91c53c-6f74-4594-8c3b-b336d89705fa)
+
+This is an example of retrieving data from the external service (OpenWeatherMap.org).
+![diff 490ms](https://github.com/kokchay/kameleoon/assets/125590318/05406577-bd60-4862-9ba6-3cbaa5f74af6)
+
