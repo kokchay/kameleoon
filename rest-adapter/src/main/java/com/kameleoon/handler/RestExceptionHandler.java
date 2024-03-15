@@ -174,7 +174,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ResponseBody
   @ExceptionHandler(AbstractBusinessLogicException.class)
-  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseEntity<ErrorResponse> handleException(final HttpServletRequest request,
                                                        final BusinessLogicException ex) {
     final String message = Optional.of(ex)
@@ -187,12 +187,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                              .orElse(DEFAULT_CODE);
     return new ResponseEntity<>(ErrorResponse.builder()
                                              .path(request.getServletPath())
-                                             .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                                             .status(HttpStatus.BAD_REQUEST.value())
                                              .code(code)
                                              .message(message)
-                                             .error(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                                             .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
                                              .build(),
-                                HttpStatus.INTERNAL_SERVER_ERROR);
+                                HttpStatus.valueOf(ex.getCode()));
   }
 
 }

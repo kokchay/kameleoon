@@ -36,7 +36,7 @@ public class WeatherController {
     @ApiResponse(responseCode = "404", description = "City not found",
       content = @Content) })
   @GetMapping("{city}")
-  public ResponseEntity<WeatherResponseDto> something(@PathVariable(value = "city") final String city,
+  public ResponseEntity<WeatherResponseDto> weather(@PathVariable(value = "city") final String city,
                                                       @RequestParam(required = false, name = "on-demand") Boolean isOnDemand) {
 
     return ResponseEntity.ok(weatherServiceImpl.getWeatherInfo(city, isOnDemand != null && isOnDemand));
