@@ -18,8 +18,11 @@ public class ExternalServiceResponseException extends AbstractBusinessLogicExcep
   }
 
   public ExternalServiceResponseException(final String message) {
-    this.code = ErrorCodes.INTERNAL_SERVER_ERROR.getCode();
-    this.message = message;
+    this(ErrorCodes.INTERNAL_SERVER_ERROR.getCode(), message);
+  }
+
+  public ExternalServiceResponseException(final int code) {
+    this(code, ErrorCodes.INTERNAL_SERVER_ERROR.getMessage());
   }
 
   public ExternalServiceResponseException(final int code, final String message) {

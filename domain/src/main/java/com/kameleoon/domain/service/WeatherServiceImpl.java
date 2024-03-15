@@ -3,7 +3,6 @@ package com.kameleoon.domain.service;
 
 import com.kameleoon.domain.adapter.RestExternalService;
 import com.kameleoon.domain.adapter.WeatherCacheService;
-import com.kameleoon.domain.common.ErrorCodes;
 import com.kameleoon.domain.configuraiton.WeatherConfigurationProperties;
 import com.kameleoon.domain.dto.WeatherResponseDto;
 import com.kameleoon.domain.exception.ExternalServiceResponseException;
@@ -15,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -56,8 +56,7 @@ public class WeatherServiceImpl implements WeatherService {
     WeatherResponseDto response;
 
     if (isOnDemand || (response = weatherCacheService.get(cacheKey)) == null) {
-      response = fetchWeatherInfoFromExternalSource(cityName)
-        .orElseThrow(() -> new ExternalServiceResponseException("Failed to fetch weather info."));
+      response = fetchWeatherInfoFromExternalSource(cityName);
       weatherCacheService.put(cacheKey, response);
     }
 
@@ -83,7 +82,7 @@ public class WeatherServiceImpl implements WeatherService {
    * @return Optional containing the fetched WeatherResponseDto, or empty if fetching fails.
    * @throws ExternalServiceResponseException If there is an error fetching weather information from the external source.
    */
-  private Optional<WeatherResponseDto> fetchWeatherInfoFromExternalSource(final String cityName) {
+  private WeatherResponseDto fetchWeatherInfoFromExternalSource(final String cityName) {
     try {
       final HttpHeaders headers = new HttpHeaders();
       headers.setContentType(MediaType.APPLICATION_JSON);
@@ -99,14 +98,19 @@ public class WeatherServiceImpl implements WeatherService {
         new ParameterizedTypeReference<>() {},
         HttpMethod.GET
       );
-      return Optional.ofNullable(responseEntity.getBody());
+
+      if(!responseEntity.getStatusCode().is2xxSuccessful())
+        throw new ExternalServiceResponseException(HttpStatus.NOT_FOUND.value());
+
+      return responseEntity.getBody();
+
     } catch (Exception e) {
       log.error("External Service error, couldn't retrieve data from :{}\n, exception message: {}, cause: {}, stackTrace: {}",
         props.getOpenweathermap().getApiUrl(),
         e.getMessage(),
         e.getCause(),
         e.getStackTrace());
-      throw new ExternalServiceResponseException(ErrorCodes.INTERNAL_SERVER_ERROR.getMessage());
+      throw new ExternalServiceResponseException(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
   }
 }
